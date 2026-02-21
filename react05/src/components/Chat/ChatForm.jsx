@@ -7,7 +7,7 @@ const ChatForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({
-      type: "chat/sendMessage",
+      type: "chat/sendMessages",
       payload: message,
     });
     setMessage("");

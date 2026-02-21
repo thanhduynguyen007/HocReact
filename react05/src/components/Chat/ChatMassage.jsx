@@ -1,19 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "../../store/hook";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "../../store/hook";
 
 const ChatMassage = () => {
   const { chatMessages } = useSelector();
-  //Tạo state nội bộ và lưu giá trị localStorage và lưu lại
-  const [messages, setMessages] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (localStorage.getItem("chat_messages")) {
-      const messageData = JSON.parse(localStorage.getItem("chat_messages"));
-      setMessages(messageData);
+    const data = localStorage.getItem("chat_messages");
+    if (data) {
+      dispatch({
+        type: "chat/fetchMessages",
+        payload: JSON.parse(data),
+      });
     }
+  }, []);
+
+  useEffect(() => {
     if (chatMessages.length) {
-      localStorage.setItem("chat_messages", JSON.stringify(chatMessages)); // lưu kiểu này nếu như load lại trang thì state sẽ lưu lại mảng rỗng: load trang ==> state set lại "" ==> localStorage lưu state = ""
+      localStorage.setItem("chat_messages", JSON.stringify(chatMessages));
     }
   }, [chatMessages]);
+  // useEffect(() => {
+  //   const handleStorage = (e) => {
+  //     if (e.key === "chat_messages") {
+  //       dispatch({
+  //         type: "chat/fetchMessages",
+  //         payload: JSON.parse(e.newValue),
+  //       });
+  //     }
+  //   };
+
+  //   window.addEventListener("storage", handleStorage);
+
+  //   return () => window.removeEventListener("storage", handleStorage);
+  // }, []);
   return (
     <div className="chat-message">
       {chatMessages.map((item, index) => (
@@ -24,5 +43,4 @@ const ChatMassage = () => {
     </div>
   );
 };
-
 export default ChatMassage;

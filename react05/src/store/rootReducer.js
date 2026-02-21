@@ -10,15 +10,15 @@ export const rootReducer = (state, action) => {
                 ...state,
                 message: action.payload,
             }
-        case "chat/sendMessage":
+        case "chat/sendMessages":
             return {
                 ...state,
                 chatMessages: [...state.chatMessages, action.payload]
             }
-        case "chat/fetchMessage":
+        case "chat/fetchMessages":
             return {
                 ...state,
-                chatMessages: action.payload
+                chatMessages: action.payload, //Đọc localStorage  --> dispatch lên action chat/fetchMessage
             }
         default:
             return state;

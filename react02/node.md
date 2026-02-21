@@ -13,7 +13,7 @@ Functional Component --> Chỉ có props
 - Xử lí các công việc side effect
   Ví dụ
   State thay đổi --> re-render
-  Tình tổng --> Side Effect --> chạy sao công việc chính
+  Tình tổng --> Side Effect --> chạy sau công việc chính
 
 useEffect(callback, dependencies); không có giá trị trả về: undefined
 Các trường hợp xảy ra

@@ -1,11 +1,12 @@
 import React from "react";
 
-const Content = () => {
+const Content = ({ onReset }) => {
   console.log("Content Re-Render");
 
   return (
     <div>
       <h2>This is a content</h2>
+      <button onClick={onReset}>Reset</button>
     </div>
   );
 };
